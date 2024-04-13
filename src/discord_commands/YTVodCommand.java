@@ -23,7 +23,11 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 public class YTVodCommand implements DiscordCommand {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AspectiBot.class);
-    public static boolean isEphemeral = true;
+
+    @Override
+    public boolean isEphemeral() {
+        return true;
+    }
 
     @Override
     public CommandData register() {

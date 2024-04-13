@@ -46,7 +46,7 @@ public class ClipCommand implements TwitchCommand {
 		        clipMessage = "***" + clipName + "*** clipped by " + event.getUser().getName() + "\n" + clipURL; 
 		    }
 		    
-		    clipChannel.sendMessage(clipMessage).queueAfter(10, TimeUnit.SECONDS);
+		    clipChannel.sendMessage(clipMessage).queueAfter(60, TimeUnit.SECONDS);
 		} else {
 		    LOG.error("response: Clip Channel ID not configured or invalid!");
 		}
