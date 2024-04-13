@@ -26,6 +26,7 @@ import utils.JSONUtils;
 public class BirthdayCommand implements DiscordCommand {
 
     private static final Logger LOG = LoggerFactory.getLogger(BirthdayCommand.class);
+    public static boolean isEphemeral = true;
 
     public BirthdayCommand() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(BirthdayScheduler.TIME_ZONE));

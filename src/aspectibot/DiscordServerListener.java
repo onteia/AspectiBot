@@ -49,7 +49,8 @@ public class DiscordServerListener extends ListenerAdapter {
 		DiscordCommand cmd;
 		if((cmd = commandMap.get(event.getName())) != null) {
 			MessageCreateData data = cmd.reply(event);
-			event.reply(data).setEphemeral(true).queue();
+			System.out.println(cmd.isEphemeral + "");
+			event.reply(data).setEphemeral(cmd.isEphemeral).queue();
 		}
 	}
     

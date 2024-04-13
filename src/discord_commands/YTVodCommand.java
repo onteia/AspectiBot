@@ -1,6 +1,5 @@
 package discord_commands;
 
-import java.lang.StackWalker.Option;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -24,12 +23,13 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 public class YTVodCommand implements DiscordCommand {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AspectiBot.class);
+    public static boolean isEphemeral = true;
 
     @Override
     public CommandData register() {
         CommandData command = Commands.slash("addytvod", "add youtube vod button to message")
             .addOptions(
-                new OptionData(OptionType.INTEGER, "message-id", "id of the message to attach the link to", true),
+                new OptionData(OptionType.STRING, "message-id", "id of the message to attach the link to", true),
                 new OptionData(OptionType.STRING, "url", "youtube link of the vod", true)
             )
             .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MANAGE_CHANNEL));
@@ -38,7 +38,7 @@ public class YTVodCommand implements DiscordCommand {
 
     @Override
     public MessageCreateData reply(SlashCommandInteractionEvent event) {
-        long message_id = event.getOption("message-id").getAsLong();
+        String message_id = event.getOption("message-id").getAsString();
         String url = event.getOption("url").getAsString();
         try {
             Message msg = AspectiBot.jda.getNewsChannelById(AspectiBot.LIVE_CHANNEL_ID)
@@ -46,7 +46,7 @@ public class YTVodCommand implements DiscordCommand {
                 .submit()
                 .get();
             LayoutComponent url_button = (LayoutComponent) Button.link(url, "Watch VOD on YT");
-            msg.editMessageComponents(url_button);
+            msg.editMessageComponents(url_button).queue();
         } catch (InterruptedException e1) {
             LOG.error("reply: unable to get the message!");
             e1.printStackTrace();
