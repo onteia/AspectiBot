@@ -1,5 +1,6 @@
 package discord_commands;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -49,8 +50,11 @@ public class YTVodCommand implements DiscordCommand {
                 .retrieveMessageById(message_id)
                 .submit()
                 .get();
-            LayoutComponent url_button = (LayoutComponent) Button.link(url, "Watch VOD on YT");
-            msg.editMessageComponents(url_button).queue();
+
+            Button url_button = Button.link(url, "Watch VOD on YT");
+            ArrayList<LayoutComponent> elem_list = new ArrayList<LayoutComponent>();
+            elem_list.add((LayoutComponent) url_button);
+            msg.editMessageComponents(elem_list).queue();
         } catch (InterruptedException e1) {
             LOG.error("reply: unable to get the message!");
             e1.printStackTrace();
