@@ -20,7 +20,7 @@ public class BirthdayScheduler extends TimerTask {
 
     private static final Logger LOG = LoggerFactory.getLogger(BirthdayScheduler.class);
     public static final String TIME_ZONE = "Canada/Mountain";
-    public static final int HOUR = 12;
+    public static final int HOUR = 5;
     public static final int MINUTE = 0;
     public static final int SECOND = 0;
     private final long pingChannelId = 864273305330909209L;
